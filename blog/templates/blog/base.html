@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+	{% include "blog/head.html" %}
+  <body>
+	<div id="colorlib-page">
+		{% include "blog/asideNavbar.html" %}
+
+		
+		{% block content %}
+			
+		{% endblock content %}
+	
+     
+  	{% include "blog/scripts.html" %}
+  	
+  </body>
+</html>
