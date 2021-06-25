@@ -1,61 +1,49 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
-<div id="colorlib-main">
-	<section class="ftco-section ftco-no-pt ftco-no-pb">
-	<div class="container">
-		<div class="row d-flex">
-			<div class="col-xl-8 py-5 px-md-5">
-				<div class="row pt-md-4">
-					<div class="col-md-12">
-					{% for post in posts %}
-													
-						<div class="blog-entry ftco-animate d-md-flex">
-								<a href="single.html" class="img img-2" style="background-image: url({{ post.thumbnail.url }});"></a>
-							<div class="text text-2 pl-md-4">
-		             			<h3 class="mb-2"><a href="single.html">{{post.title}}</a></h3>
-				              	<div class="meta-wrap">
-									<p class="meta">
-					              		<span><i class="icon-calendar mr-2"></i>{{post.date_posted|date:"M d, Y"}}</span>
+<div class="row pt-md-4">
+		<div class="col-md-12">
+			{% for post in posts %}
+			<div class="blog-entry ftco-animate d-md-flex">
+					<a href="single.html" class="img img-2" style="background-image: url({{ post.thumbnail.url }});"></a>
+				<div class="text text-2 pl-md-4">
+         			<h2 class="mb-2"><a href="{% url 'single-post' post.id %}">{{post.title}}</a></h2>
+	              	<div class="meta-wrap">
+						<p class="meta m-0">
+		              		<span><i class="icon-calendar mr-2"></i>{{post.date_posted|date:"M d, Y"}}</span>
 
-					              		<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-					              		<div class="">
-					              			{% for cat in post.category.all %}
-						              		<span>
-						              			<a href="single.html"><i class="icon-tag mr-2"></i>{{cat}}</a>
-						              		</span>
-						              		{% endfor %}
-					              		</div>
-					              	</p>
-			              		</div>
-					              <p class="mb-4">{{post.overview}}</p>
-					              <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
-				            </div>
-						</div>
-						{% endfor %}
-					</div>
-
-	    		</div><!-- END-->
-    		<div class="row">
-	          <div class="col">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="#">&lt;</a></li>
-	                <li class="active"><span>1</span></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">4</a></li>
-	                <li><a href="#">5</a></li>
-	                <li><a href="#">&gt;</a></li>
-	              </ul>
+		              		<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+		              	</p>
+		              	<p class="meta">					              	
+	              			<i class="icon-tag mr-2"></i>
+	              			{% for cat in post.category.all %}
+		              		<span class="">
+		              			<a class="badge badge-light text-muted" href="{% url 'category' cat %}">{{cat}}</a>
+		              		</span>
+		              		{% endfor %}
+		              	</p>
+              		</div>
+		              <p class="mb-4">{{post.overview}}</p>
+		              <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
 	            </div>
-	          </div>
-	        </div>
+			</div>
+			{% endfor %}
+		</div>
+	</div><!-- END-->
+	<div class="row">
+	  <div class="col">
+	    <div class="block-27">
+	      <ul>
+	        <li><a href="#">&lt;</a></li>
+	        <li class="active"><span>1</span></li>
+	        <li><a href="#">2</a></li>
+	        <li><a href="#">3</a></li>
+	        <li><a href="#">4</a></li>
+	        <li><a href="#">5</a></li>
+	        <li><a href="#">&gt;</a></li>
+	      </ul>
 	    </div>
-	{% include "blog/aside.html" with categories=categories %}
-</section>
-</div><!-- END COLORLIB-MAIN -->
-
-
+	  </div>
+	</div>
 
 {% endblock content %}

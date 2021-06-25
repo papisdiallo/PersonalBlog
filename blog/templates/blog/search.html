@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<div class="sidebar-box pt-md-4">
+  <form action="{% url 'search' %}"  class="search-form" method="get">
+    <div  class="form-group">
+      <span class="icon icon-search"></span>
+      <input type="text" value="{{q}}" name="q" class="form-control" placeholder="Type a keyword and hit enter">
+    </div>
+  </form>
+</div>
+<h4>({{count}}) search results found for:  <span style="background: #f8f9fa;
+									 border-radius: 5px;
+									 color: #6c757d;
+									 padding: 5px" >{{q}}</span></h4>
+
+<div class="row pt-md-4">
+	<div class="col-md-12">
+		{% for post in posts %}										
+			<div class="blog-entry ftco-animate d-md-flex">
+					<a href="single.html" class="img img-2" style="background-image: url({{ post.thumbnail.url }});"></a>
+				<div class="text text-2 pl-md-4">
+         			<h2 class="mb-2"><a href="{% url 'single-post' post.id %}">{{post.title}}</a></h2>
+	              	<div class="meta-wrap">
+						<p class="meta m-0">
+		              		<span><i class="icon-calendar mr-2"></i>{{post.date_posted|date:"M d, Y"}}</span>
+
+		              		<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+		              	</p>
+		              	<p class="meta">					              	
+	              			<i class="icon-tag mr-2"></i>
+	              			{% for cat in post.category.all %}
+		              		<span class="">
+		              			<a class="badge badge-light text-muted" href="single.html">{{cat}}</a>
+		              		</span>
+		              		{% endfor %}
+		              	</p>
+              		</div>
+		              <p class="mb-4">{{post.overview}}</p>
+		              <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+	            </div>
+			</div>
+			{% empty %}
+			<h4>There were no result found </h4>
+			{% endfor %}
+		</div>
+	</div><!-- END-->
+	
+
+{% endblock content %}

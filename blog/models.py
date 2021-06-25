@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from tinymce import HTMLField
 
 
 class Category(models.Model):
@@ -11,20 +12,11 @@ class Category(models.Model):
 
 
 class Author(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to="media/profile_pics")
 
     def __str__(self):
-        return self.author.username
-
-
-class Comment(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    content = models.TextField()
-    date_commented = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{author.username}\'s comment'
+        return self.user.username
 
 
 class Post(models.Model):
@@ -33,8 +25,18 @@ class Post(models.Model):
     thumbnail = models.ImageField(upload_to='media/thumbnail_pics')
     category = models.ManyToManyField(Category, related_name='categories')
     overview = models.TextField()
-    content = models.TextField()
+    content = HTMLField('content')
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    date_commented = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.author}\'s comment'
