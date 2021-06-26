@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # installed apps
     'blog.apps.BlogConfig',
     'Marketing.apps.MarketingConfig',
+    'Users.apps.UsersConfig',
     'tinymce',
     'crispy_forms',
 ]
@@ -75,7 +76,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Core.wsgi.application'
+AUTH_USER_MODEL = "Users.User"
 
+AUTHENTICATION_BACKENDS = (
+    'Users.backend.EmailOrUsernameAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

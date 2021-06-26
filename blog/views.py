@@ -31,11 +31,10 @@ def get_context(request):
 
 
 def process_post_request(request, form):
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Thank You for your subcription to the newsletter")
-            return redirect('/')
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Thank You for your subcription to the newsletter")
+        return redirect('/')
 
 
 def home(request):
@@ -60,11 +59,10 @@ def singlePost(request, pk):
     form = CommentForm(request.POST or None)
     post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.all()
-    if request.method == "POST":
-        if form.is_valid():
-            form.instance.author = request.user
-            form.save()
-            return redirect('/')
+    if form.is_valid():
+        form.instance.author = request.user
+        form.save()
+        return redirect('/')
     context = get_context(request)
     context['post'] = post
     context['form'] = form

@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="card" style="padding: 14px;">
+    <div class="border-top pt-3">
+        <h3>You have been logged out successfully</h3>
+        <small class="text-muted">
+            login again?
+            <a href="{% url 'login' %}" class="ml-2">Sign in</a>
+        </small>
+    </div>
+</div>
+
+
+{% endblock content %}

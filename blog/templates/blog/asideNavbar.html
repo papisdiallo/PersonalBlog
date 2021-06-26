@@ -6,8 +6,16 @@
 	<span class="" id="myLogo">PSDiallo</span>
 </div>
 <aside id="colorlib-aside" role="complementary" class="js-fullheight">
-	<nav id="colorlib-main-menu" role="navigation">
+	<nav id="colorlib-main-menu" class="navbar" role="navigation">
 		<ul>
+			{% if user.is_authenticated %}
+			<li class="dropdown"><a href="">{{user.username}}</a>
+			<ul>
+				<li><a href="">Profile</a></li>
+				<li><a href="">Logout</a></li>
+			</ul>
+			</li>
+			{% endif %}
 			<li class="colorlib-active"><a href="{% url 'home' %}">Home</a></li>
 			<li><a href="fashion.html">Fashion</a></li>
 			<li><a href="travel.html">Travel</a></li>
