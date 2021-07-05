@@ -1,40 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
 from .models import Post, Category, Comment
 from django.db.models import Count, Q
 from Marketing.models import Subscriber
-from Marketing.forms import SubscriberForm
 from .forms import CommentForm
-
+from fonctions.funtions import counting_categories, get_context, process_post_request
 from django.contrib import messages
 
-
-def counting_categories():
-    queryset = Post\
-        .objects.values('category__name')\
-        .annotate(Count('category'))
-    return queryset
-
-
-def get_context(request):
-    posts = Post.objects.all().order_by('-date_posted')
-    form = SubscriberForm(request.POST or None)
-    categories = Category.objects.all()
-    latest_posts = posts[:4]
-    category_counting = counting_categories()
-    context = {'posts': posts,
-               'categories': categories,
-               'latest_posts': latest_posts,
-               'category_counting': counting_categories,
-               'form': form,
-               }
-    return context
-
-
-def process_post_request(request, form):
-    if form.is_valid():
-        form.save()
-        messages.success(request, "Thank You for your subcription to the newsletter")
-        return redirect('/')
 
 
 def home(request):
@@ -61,13 +33,28 @@ def singlePost(request, pk):
     comments = Comment.objects.all()
     if form.is_valid():
         form.instance.author = request.user
+        form.instance.post = post
         form.save()
-        return redirect('/')
+        return redirect('single-post/')
     context = get_context(request)
     context['post'] = post
     context['form'] = form
     context['comments'] = comments
     return render(request, 'blog/single.html', context)
+
+def CommentView(request, pk):
+    form = CommentForm(request.POST or None)
+    post = get_object_or_404(Post, pk=pk)
+    if request.is_ajax():
+        if form.is_valid():
+            content = request.POST.get('content')
+            instance = form.save(commit=False)
+            instance.post = post
+            instance.author = request.user
+            instance.content = content
+            instance.save()
+
+    return JsonResponse({'content': content,})
 
 
 def search(request):

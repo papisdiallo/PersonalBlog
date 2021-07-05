@@ -3,39 +3,40 @@
 	<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle ">
 		<i></i>
 	 </a>
-	<span class="" id="myLogo">PSDiallo</span>
+	 
+	<span class="profile mt-2" id="myLogo">PSDiallo</span>
 </div>
 <aside id="colorlib-aside" role="complementary" class="js-fullheight">
-	<nav id="colorlib-main-menu" class="navbar" role="navigation">
+	<nav id="colorlib-main-menu" role="navigation">
 		<ul>
 			{% if user.is_authenticated %}
-			<li class="dropdown"><a href="">{{user.username}}</a>
-			<ul>
-				<li><a href="">Profile</a></li>
-				<li><a href="">Logout</a></li>
-			</ul>
+			<li class='dropdown' style="cursor: pointer;"><span id="username" class="badge badge-info" style="color: white; padding: 12px;" >{{user.username}} <i class="icon icon-chevron-down"></i></span>
+				<ul id="profiles" class="non-profile fadeInDown">
+					<li><a href="{% url 'profile' %}">Profile</a></li>
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+				</ul>
 			</li>
+			{% else %}
+			<span><a href="{% url 'login' %}" class="btn btn-info mb-2 mt-2">Login</a></span>
 			{% endif %}
 			<li class="colorlib-active"><a href="{% url 'home' %}">Home</a></li>
-			<li><a href="fashion.html">Fashion</a></li>
-			<li><a href="travel.html">Travel</a></li>
+			<li><a href="about.html">About</a></li>
 			<li><a href="about.html">About</a></li>
 			<li><a href="contact.html">Contact</a></li>
 		</ul>
 	</nav>
 
 	<div class="colorlib-footer">
-		<h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home' %}" style="background-image: url({% static 'blog/images/bg_1.jpg' %});">Papis <span>Diallo</span></a></h1>
+		<h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home' %}" style="background-image: url({% static 'blog/images/textLogo1.jpg' %});">Papis <span>Diallo</span></a></h1>
 		<div class="mb-4">
 			<h3>Get In Touch Now</h3>
-			<i class="icon-instagram mr-3"></i>
-			<i class="icon-github mr-3"></i>
-			<i class="icon-facebook mr-3"></i>
-			<i class="icon-twitter mr-3"></i>
-			<i class="icon-linkedin mr-3"></i>
+			<i class="icon-instagram mr-1"></i>
+			<i class="icon-github mr-1"></i>
+			<i class="icon-facebook mr-1"></i>
+			<i class="icon-twitter mr-1"></i>
+			<i class="icon-linkedin mr-1"></i>
 		</div>
-		<p class="pfooter"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-		  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-		  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+		<p class="pfooter">
+		  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved.
 	</div>
-</aside> <!-- END COLORLIB-ASIDE -->
+</aside>

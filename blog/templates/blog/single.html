@@ -45,6 +45,16 @@
     <aside id="colorlib-aside" role="complementary" class="js-fullheight">
       <nav id="colorlib-main-menu" role="navigation">
         <ul>
+          {% if user.is_authenticated %}
+            <li class='dropdown' style="cursor: pointer;"><span id="username" class="badge badge-info" style="color: white; padding: 12px;" >{{user.username}} <i class="icon icon-chevron-down"></i></span>
+              <ul id="profiles" class="non-profile fadeInDown">
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <span><a href="{% url 'login' %}" class="btn btn-info mb-2 mt-2">Login</a></span>
+          {% endif %}
           <li class="colorlib-active"><a href="{% url 'home' %}">Home</a></li>
           <li><a href="fashion.html">Fashion</a></li>
           <li><a href="travel.html">Travel</a></li>
@@ -57,11 +67,11 @@
         <h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home' %}" style="background-image: url({% static 'blog/images/bg_1.jpg' %});">Papis <span>Diallo</span></a></h1>
         <div class="mb-4">
           <h3>Get In Touch Now</h3>
-          <i class="icon-instagram mr-3"></i>
-          <i class="icon-github mr-3"></i>
-          <i class="icon-facebook mr-3"></i>
-          <i class="icon-twitter mr-3"></i>
-          <i class="icon-linkedin mr-3"></i>
+          <i class="icon-instagram mr-1"></i>
+          <i class="icon-github mr-1"></i>
+          <i class="icon-facebook mr-1"></i>
+          <i class="icon-twitter mr-1"></i>
+          <i class="icon-linkedin mr-1"></i>
         </div>
         <p class="pfooter"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
           Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -74,8 +84,8 @@
           <div class="row d-flex">
             <div class="col-lg-10 px-md-5 py-5 m-auto">
               <div class="">
-                <h1 class="mb-3">A Loving Heart is the Truest Wisdom</h1>
-                <div class="meta mb-4"><h5>October 03, 2018 at 2:21pm</h5></div>
+                <h1 class="mb-3">{{post.title}}</h1>
+                <div class="meta mb-4"><h5>{{post.date_posted|timesince}} ago</h5></div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
                 <p>
                   <img src="{{post.thumbnail.url}}" alt="" class="img-fluid">
@@ -87,25 +97,26 @@
                 <div class="tag-widget post-tag-container mb-5 mt-5">
                   <div class="tagcloud">
                     {% for tag in post.category.all %}
-                    <a href="#" class="tag-cloud-link">{{tag.name}}</a>
+                    <a href="{% url 'category' tag.name %}" class="tag-cloud-link">{{tag.name}}</a>
                     {% endfor %}
                   </div>
                 </div>
                 
                 <div class="about-author d-flex p-4 bg-light">
-                  <div class="bio mr-5">
-                    <img src="{{post.author.profile_pic.url}}" alt="Image placeholder" class="img-fluid mb-4">
+                  <div class="bio mr-4">
+                    <img src="{{post.author.profile.profile_picture.url}}" alt="Image placeholder" class="img-fluid mb-4">
                   </div>
 
                   <div class="desc">
-                    <h3>{{post.author}}</h3>
+                    <h3>{{post.author.username}}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
                   </div>
                 </div>
 
 
                 <div class="pt-5 mt-5">
-                  <h3 class="mb-5 font-weight-bold">6 Comments</h3>
+              
+                  <h3 class="mb-5 font-weight-bold">{{post.comments.all.count}} Comment(s)</h3>
                   <ul class="comment-list">
                     <li class="comment">
                       <div class="row">
@@ -142,16 +153,16 @@
                       </ul>
                   </li>
 
-                  <ul class="comment-list">
-                    {% for comment in comments%}
+                  <ul id="commentUl" class="comment-list">
+                    {% for comment in post.comments.all%}
                     <li class="comment">
                       <div class="row">
                       <div class="vcard bio">
-                        <img src="{{comment.author.profile_pic.url}}" alt="Image placeholder">
+                        <img src="{{comment.author.profile.profile_picture.url}}" alt="Image placeholder">
                       </div>
                         <div>
-                          <p class="m-0 p-0"  style="color: rgba(0, 0, 0, 0.8); font-weight: 600;">{{comment.author}}</p>
-                          <p class="meta" style="color: #343a40; font-size: 12px;">{{comment.date_commented}}</p>
+                          <p class="m-0 p-0"  style="color: rgba(0, 0, 0, 0.8); font-weight: 600;">{{comment.author.username}}</p>
+                          <p class="meta" style="color: #343a40; font-size: 12px;">{{comment.date_commented|timesince}} ago</p>
                         </div>
                       </div>
                       <div class="comment-body" style="padding-left: 43px;">
@@ -161,12 +172,12 @@
 
                     </li>
                     {% endfor %}
-                </ul>
+                  </ul>
                 <!-- END comment-list -->
-                  
                   <div class="comment-form-wrap pt-5">
+                    {% if user.is_authenticated %}
                     <h3 class="mb-5">Leave a comment</h3>
-                    <form  class="p-3 bg-light" method="post">
+                    <form id="commentForm" class="p-3 bg-light" method="post">
                       {% csrf_token %}
                       <div class="form-group">
                         <label for="message">Comment</label>
@@ -177,6 +188,11 @@
                       </div>
 
                     </form>
+                    {% else %}
+                    <div class="alert alert-info">
+                      <h6> Please login to be able to comment </h6>
+                    </div>
+                    {% endif %}
                   </div>
                 </div>
               </div><!-- END-->
@@ -206,6 +222,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static 'blog/js/google-map.js' %}"></script>
   <script src="{% static 'blog/js/main.js' %}"></script>
+  <script src="{% static 'blog/js/comment.js' %}"></script>
     
   </body>
 </html>

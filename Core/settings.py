@@ -138,6 +138,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+#Email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 # tinymce configurations
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,

@@ -24,26 +24,11 @@
 		              	</p>
               		</div>
 		              <p class="mb-4">{{post.overview}}</p>
-		              <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+		              <p><a href="{% url 'single-post' post.id %}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
 	            </div>
 			</div>
 			{% endfor %}
 		</div>
 	</div><!-- END-->
-	<div class="row">
-	  <div class="col">
-	    <div class="block-27">
-	      <ul>
-	        <li><a href="#">&lt;</a></li>
-	        <li class="active"><span>1</span></li>
-	        <li><a href="#">2</a></li>
-	        <li><a href="#">3</a></li>
-	        <li><a href="#">4</a></li>
-	        <li><a href="#">5</a></li>
-	        <li><a href="#">&gt;</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	</div>
 
 {% endblock content %}

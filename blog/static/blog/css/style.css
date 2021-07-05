@@ -8309,6 +8309,7 @@ h1, h2, h3, h4, h5,
     left: 0;
     right: 0;
     padding: 0 20px;
+    font-family: "Rubik", poppins;
     font-size: 17px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.6); }
@@ -8318,7 +8319,8 @@ h1, h2, h3, h4, h5,
     #colorlib-aside .colorlib-footer a {
       color: #000000; }
     #colorlib-aside .colorlib-footer .pfooter {
-      font-size: 14px; }
+      font-size: 14px;
+      font-family: "Rubik", poppins;}
     #colorlib-aside .colorlib-footer .colorlib-subscribe-form {
       width: 100%; }
       #colorlib-aside .colorlib-footer .colorlib-subscribe-form .form-group {
@@ -8527,10 +8529,6 @@ h1, h2, h3, h4, h5,
 
 .btn {
   cursor: pointer;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -ms-border-radius: 30px;
-  border-radius: 30px;
   -webkit-box-shadow: none !important;
   box-shadow: none !important; }
   .btn:hover, .btn:active, .btn:focus {
@@ -9353,55 +9351,33 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
-.navbar li {
-      position: relative;
-  }
-.navbar .dropdown ul {
-    visibility: hidden !important;
-  }
-.navbar .dropdown ul {
-    display: block;
-    position: absolute;
-    left: 14px;
-    top: calc(100% + 30px);
-    margin: 0;
-    padding: 10px 0;
-    z-index: 99;
-    opacity: 0;
-    visibility: hidden;
-    background: #fff;
-    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-    transition: 0.3s;
-    border-radius: 4px;
-}
 
-.navbar .dropdown ul li {
-  min-width: 200px;
-}
-.navbar .dropdown ul a {
-  padding: 10px 20px;
-  font-size: 15px;
-  text-transform: none;
-  font-weight: 600;
-}
+  #colorlib-aside #colorlib-main-menu ul > li.dropdown > ul{
+      border-radius: 5px;
+      padding: 15px;
+    } 
+    .profile {
+      display: block;
+    }
+    .non-profile {
+      display: none;
+    }
 
-.navbar a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0 10px 30px;
-  font-family: "Rubik", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #013289;
-  white-space: nowrap;
-  transition: 0.3s;
-}
+    #myLogo {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1EAFED;
+    }
+    .colorlib-footer  i {
+      background-color: #666;
+      color: white;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 7px;
+      font-size: 15px !important;
+    }
+    .colorlib-footer  i:hover {
+      background-color: #1EAFED; 
+      font-size: 17px;
+    }
 
-
-.navbar .dropdown ul a:hover, .navbar .dropdown ul .navbar .dropdown ul li:hover > a {
-  color: #4154f1;
-}
-.navbar .dropdown:hover > ul {
-  visibility: visible;
-}

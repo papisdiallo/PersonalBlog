@@ -6,4 +6,5 @@ urlpatterns = [
     path('search/', blog_views.search, name="search"),
     path('category/<str:cat>/', blog_views.category, name="category"),
     path('post/<int:pk>/', blog_views.singlePost, name="single-post"),
+    path('post/<int:pk>/comments/', blog_views.CommentView, name="comment"),
 ]
