@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load static %}
 {% block content %}
 
 <div class="sidebar-box pt-md-4">
@@ -41,7 +42,10 @@
 	            </div>
 			</div>
 			{% empty %}
-			<h4>There were no result found </h4>
+			<h5>There were no result found </h5>
+			<p>
+				<img src="{% static 'blog/images/emptySearch.jpg' %}" alt="" class="img-fluid">
+			</p>
 			{% endfor %}
 		</div>
 	</div><!-- END-->

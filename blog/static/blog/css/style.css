@@ -8251,8 +8251,9 @@ h1, h2, h3, h4, h5,
       margin: 0 0 10px 0;
       padding: 0;
       list-style: none;
-      font-size: 19px;
-      font-weight: 400; }
+      font-size: 16px;
+      letter-spacing: 0.03rem;
+      font-weight: 500; }
       #colorlib-aside #colorlib-main-menu ul li a {
         color: rgba(0, 0, 0, 0.7);
         text-decoration: none;
@@ -9368,16 +9369,28 @@ textarea.form-control {
       font-weight: 600;
       color: #1EAFED;
     }
-    .colorlib-footer  i {
-      background-color: #666;
-      color: white;
-      cursor: pointer;
-      border-radius: 50%;
-      padding: 7px;
-      font-size: 15px !important;
-    }
-    .colorlib-footer  i:hover {
-      background-color: #1EAFED; 
-      font-size: 17px;
-    }
+.colorlib-footer .social-links span {
+    background-color: #837a7ae6;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    /* padding: 7px 10px; */
+    font-size: 20px !important;
+    width: 30px;
+    height: 30px;
+    padding: 8px 0;
+    transition: background ease .4s;
+}
+
+.colorlib-footer .social-links span i {
+    /* padding: 10px; */
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+.colorlib-footer .social-links span:hover {
+  background: #1eafed;
+}
 

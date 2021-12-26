@@ -8,11 +8,8 @@ User = get_user_model()
             
 class LoginForm(forms.Form):
     Username_or_Email = forms.CharField(max_length=140, widget=forms.TextInput(attrs={
-        'placeholder': 'Enter Username or Email....'
     }))
-    Password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Enter your password....'
-    }))
+    Password = forms.CharField(widget=forms.PasswordInput())
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get('Username_or_Email')

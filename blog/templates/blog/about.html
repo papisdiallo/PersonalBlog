@@ -1,94 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Andrea - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+{% extends 'blog/base.html' %}
+{% block content %}
+<main id="main"><!--CONTENT--><article itemscope="" itemtype="http://schema.org/Article" class="main-article text-content"><h1 class="offscreen">David Walsh</h1><img src="/demo/about-david-walsh.jpg" alt="David Walsh">
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+  My name is David Walsh. I'm a 37-year old web developer and software engineer from Madison, Wisconsin. In the web world I'm:
+  <ul>
+     <li style="list-style-type: none">
+  <ul>
+     <li>Senior Software Engineer at <a href="https://metamask.io">MetaMask</a></li>
+     <li>Former Senior Software Engineer and evangelist for <a href="/mozilla" rel="nofollow">Mozilla</a></li>
+     <li>Technical author of <a href="/">David Walsh Blog</a> and guest poster on several other sites.</li>
+     <li>Conference and Meetup speaker (London AJAX, AustinJS, BrazilJS, Snow*Mobile, etc.)</li>
+     <li>Core Developer for the <a href="http://mootools.net" rel="nofollow">MooTools JavaScript Framework</a>, and creator of numerous MooTools plugins.</li>
+     <li>Founder of <a href="//scriptandstyle.com" rel="nofollow">Script &amp;Style</a></li>
+     <li>Founder of <a href="//wynq.com" rel="nofollow">Wynq Web Labs</a></li>
+  </ul>
+  </li>
+  </ul>
+  In a past web life I was:
+  <ul>
+     <li style="list-style-type: none">
+  <ul>
+     <li>Software Engineer at <a href="//sitepen.com" rel="nofollow">SitePen</a></li>
+     <li>Consultant for <a href="//bestbuy.com" rel="nofollow">Best Buy</a> and other large corporations.</li>
+     <li>Documentation contributor to the <a href="//dojotoolkit.org" rel="nofollow">Dojo Toolkit</a></li>
+     <li>Zone Moderator at <a href="//dzone.com" rel="nofollow">DZone</a></li>
+  </ul>
+  </li>
+  </ul>
+  I don't design the sites, I make them work.
+  <h2>Technologies and Philosophy</h2>
+  My expertise and interest lies in front-end technologies, including HTML/5, CSS, JavaScript (as well as frameworks like jQuery, MooTools, and Dojo Toolkit). My server side skills revolve around PHP and Python. I enjoy dabbling in mobile development and edge devices and environments. I focus on open source contributing and evangelism, as they open a world of possibilities and rewards for their hard-working developers.
+  
+  My philosophy on learning to use web technologies is always the same: experiment, fail, fix, fail again, fix again. Reading books will only get you so far -- you should spend time with your debugger, experimenting away with whichever technology you need to learn. Always keep an open mind, use tools you wouldn't usually use, and never give up.
+  <h2>Spare Time</h2>
+  When not buried in my text editor, I enjoy watching movies on one of the dozen devices Netflix has an app for, fawning over my awesome dog Ringo, and spending time with my wife, Kristina. I spend much of my weekends watching European football, cheering on the Arsenal and laughing at the misfortunes of Liverpool, Manchester City, Chelsea, and Barcelona. If you're ever in the mood to get pwned, feel free to find me on Call of Duty for XBox. If you want to hear my <em>real</em> opinion on things, throw a bottle of wine at me.
+  <h2>Contacting Me</h2>
+  I do my best to be as accessible as possible. Visit the <a href="/contact">contact</a> page to find out how you can get in touch.</article></main>
 
-    <link rel="stylesheet" href="css/aos.css">
-
-    <link rel="stylesheet" href="css/ionicons.min.css">
-
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-
-	<div id="colorlib-page">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-		<aside id="colorlib-aside" role="complementary" class="js-fullheight">
-			<nav id="colorlib-main-menu" role="navigation">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="fashion.html">Fashion</a></li>
-					<li><a href="travel.html">Travel</a></li>
-					<li class="colorlib-active"><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</nav>
-
-			<div class="colorlib-footer">
-				<h1 id="colorlib-logo" class="mb-5"><a href="index.html" style="background-image: url(images/bg_1.jpg);">Andrea <span>Moore</span></a></h1>
-				<p class="pfooter"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		</aside> <!-- END COLORLIB-ASIDE -->
-		<div id="colorlib-main">
-			<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
-	    	<div class="container-fluid px-0">
-	    		<div class="row d-flex">
-	    			<div class="col-md-6 d-flex">
-	    				<div class="img d-flex align-self-stretch align-items-center js-fullheight" style="background-image:url(images/about.jpg);">
-	    				</div>
-	    			</div>
-	    			<div class="col-md-6 d-flex align-items-center">
-	    				<div class="text px-4 pt-5 pt-md-0 px-md-4 pr-md-5 ftco-animate">
-		            <h2 class="mb-4">I'm <span>Andrea Moore</span> a Scotish Blogger &amp; Explorer</h2>
-		            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-	            </div>
-		        </div>
-	        </div>
-	    	</div>
-	    </section>
-		</div><!-- END COLORLIB-MAIN -->
-	</div><!-- END COLORLIB-PAGE -->
-
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
-    
-  </body>
-</html>
+  {% endblock content %}
+  {% block aside %}
+  {% include "blog/aside.html" with categories=categories %}
+  {% endblock aside %}

@@ -1,0 +1,11 @@
+<li class="comment">
+    <div class="vcard bio">
+        <img id="id_picture" src="{{comment.author.profile.profile_picture.url}}" alt="Image placeholder">
+    </div>
+    <div class="comment-body">
+        <h3 id="id_author">{{comment.author.username}}</h3>
+        <div class="meta">{{comment.date_commented|timesince}} ago</div>
+        <p id="id_content1">{{comment.content}}</p>
+        <p><a href="#" class="reply">Reply</a></p>
+    </div>
+</li>

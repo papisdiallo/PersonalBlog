@@ -64,7 +64,7 @@
       </nav>
 
       <div class="colorlib-footer">
-        <h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home' %}" style="background-image: url({% static 'blog/images/bg_1.jpg' %});">Papis <span>Diallo</span></a></h1>
+        <h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home' %}" style="background-image: url({% static 'blog/images/textLogo1.jpg' %});">Papis <span>Diallo</span></a></h1>
         <div class="mb-4">
           <h3>Get In Touch Now</h3>
           <i class="icon-instagram mr-1"></i>
@@ -116,63 +116,24 @@
 
                 <div class="pt-5 mt-5">
               
-                  <h3 class="mb-5 font-weight-bold">{{post.comments.all.count}} Comment(s)</h3>
-                  <ul class="comment-list">
-                    <li class="comment">
-                      <div class="row">
-                        <div class="vcard bio">
-                          <img src="{% static 'blog/images/person_1.jpg '%}" alt="Image placeholder">
-                        </div>
-                          <div>
-                            <p class="m-0 p-0"  style="color: rgba(0, 0, 0, 0.8);">John Do</p>
-                            <p class="meta" style="color: rgba(0, 0, 0, 0.8);">October 03, 2018 at 2:21pm</p>
-                          </div>
-                      </div>
-                      <div class="comment-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
-
-                      <ul class="children">
+                  <h3 class="mb-5 font-weight-bold"><span id="count">{{post.comments.all.count}}</span> Comment(s)</h3>
+                  <div id="commentUl">
+                    <ul class="comment-list" id="comment-list"><ul class="comment-list">
+                      {% for comment in post.comments.all %}
                         <li class="comment">
-                          <div class="row">
-                            <div class="vcard bio">
-                              <img src="{% static 'blog/images/person_1.jpg '%}" alt="Image placeholder">
-                            </div>
-                              <div>
-                                <p class="m-0 p-0"  style="color: rgba(0, 0, 0, 0.8);">John Do</p>
-                                <p class="meta" style="color: rgba(0, 0, 0, 0.8);">October 03, 2018 at 2:21pm</p>
-                              </div>
+                          <div class="vcard bio">
+                              <img src="{{comment.author.profile.profile_picture.url}}" alt="Image placeholder">
                           </div>
                           <div class="comment-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply">Reply</a></p>
+                              <h3>{{comment.author.username}}</h3>
+                              <div class="meta">{{comment.date_commented|timesince}} ago</div>
+                              <p>{{comment.content}}</p>
+                              <p><a href="#" class="reply">Reply</a></p>
                           </div>
-
-                        </li>
-                      </ul>
-                  </li>
-
-                  <ul id="commentUl" class="comment-list">
-                    {% for comment in post.comments.all%}
-                    <li class="comment">
-                      <div class="row">
-                      <div class="vcard bio">
-                        <img src="{{comment.author.profile.profile_picture.url}}" alt="Image placeholder">
-                      </div>
-                        <div>
-                          <p class="m-0 p-0"  style="color: rgba(0, 0, 0, 0.8); font-weight: 600;">{{comment.author.username}}</p>
-                          <p class="meta" style="color: #343a40; font-size: 12px;">{{comment.date_commented|timesince}} ago</p>
-                        </div>
-                      </div>
-                      <div class="comment-body" style="padding-left: 43px;">
-                        <p >{{comment.content}}</p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
-
-                    </li>
-                    {% endfor %}
-                  </ul>
+                        </li>                
+                      {% endfor %}
+                    </ul>
+                  </div>
                 <!-- END comment-list -->
                   <div class="comment-form-wrap pt-5">
                     {% if user.is_authenticated %}

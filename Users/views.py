@@ -40,25 +40,20 @@ def Login(request):
 def Logout(request):
     logout(request)
     messages.success(request, 'You have been logged out successfully !')
-    return render(request, 'blog/index.html')
+    return redirect('home')
 
 
 def profile(request):
     user = request.user
-    if request.method == "POST":
-        u_form = UserUpdateForm(request.POST, instance=user)
-        p_form = UserProfileForm(request.POST, request.FILES, instance=user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, "Your profile has beed updated successfully")
-            return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=user)
-        p_form = UserProfileForm(instance=user.profile)
-    context = {
-        'user': user,
-        'u_form': u_form,
-        'p_form': p_form,
-    }
+    u_form = UserUpdateForm(request.POST or None, instance=user)
+    p_form = UserProfileForm(request.POST or None, request.FILES or None, instance=user.profile)
+    if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        messages.success(request, "Your profile has beed updated successfully")
+        return redirect('profile')
+    context = get_context(request)
+    context['user'] = user
+    context['u_form'] = u_form
+    context['p_form'] = p_form
     return render(request, 'users/profile.html', context)

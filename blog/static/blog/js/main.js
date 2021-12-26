@@ -267,12 +267,9 @@ AOS.init({
 
 $('#username').click(function (e) {
 	console.log('clicked');
+	var profiles = $("#profiles");
 	e.preventDefault();
-	if ($('#profiles').hasClass('non-profile')) {
-		$('#profiles').removeClass('non-profile')
-		$('#profiles').addClass('profile')
-	} else {
-		$('#profiles').removeClass('profile')
-		$('#profiles').addClass('non-profile')
-	}
+
+	profiles.hasClass('non-profile') ? profiles.removeClass('non-profile').addClass('profile') :
+		profiles.removeClass('profile').addClass('non-profile')
 })

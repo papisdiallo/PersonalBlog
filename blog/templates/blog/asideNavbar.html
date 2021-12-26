@@ -10,33 +10,32 @@
 	<nav id="colorlib-main-menu" role="navigation">
 		<ul>
 			{% if user.is_authenticated %}
-			<li class='dropdown' style="cursor: pointer;"><span id="username" class="badge badge-info" style="color: white; padding: 12px;" >{{user.username}} <i class="icon icon-chevron-down"></i></span>
-				<ul id="profiles" class="non-profile fadeInDown">
-					<li><a href="{% url 'profile' %}">Profile</a></li>
-					<li><a href="{% url 'logout' %}">Logout</a></li>
-				</ul>
-			</li>
+			<li><a href="#" >{{user.username}}</a></li>
 			{% else %}
 			<span><a href="{% url 'login' %}" class="btn btn-info mb-2 mt-2">Login</a></span>
 			{% endif %}
 			<li class="colorlib-active"><a href="{% url 'home' %}">Home</a></li>
 			<li><a href="about.html">About</a></li>
-			<li><a href="about.html">About</a></li>
-			<li><a href="contact.html">Contact</a></li>
+			<li><a href="{% url 'contact' %}">Portfolio</a></li>
+			<li><a href="{% url 'contact' %}">Contact</a></li>
+			{% if user.is_authenticated %}
+				<li class='dropdown' style="cursor: pointer;"><a href="{% url 'contact' %}">Logout</a></li>
+			{% endif %}
 		</ul>
 	</nav>
 
 	<div class="colorlib-footer">
 		<h1 id="colorlib-logo" class="mb-4"><a href="{% url 'home' %}" style="background-image: url({% static 'blog/images/textLogo1.jpg' %});">Papis <span>Diallo</span></a></h1>
-		<div class="mb-4">
+		<div class="mb-4 social-links">
 			<h3>Get In Touch Now</h3>
-			<i class="icon-instagram mr-1"></i>
-			<i class="icon-github mr-1"></i>
-			<i class="icon-facebook mr-1"></i>
-			<i class="icon-twitter mr-1"></i>
-			<i class="icon-linkedin mr-1"></i>
+			<span><i class="icon-instagram"></i></span>
+			<span><i class="icon-github"></i></span>
+			<span><i class="icon-facebook"></i></span>
+			<span><i class="icon-twitter"></i></span>
+			<span><i class="icon-linkedin"></i></span>
 		</div>
 		<p class="pfooter">
-		  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved.
+		  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved<br>.
+		  This website is made by
 	</div>
 </aside>
