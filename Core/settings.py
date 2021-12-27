@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "tinymce",
     "crispy_forms",
     "rest_framework",
+    "Api",
 ]
 
 MIDDLEWARE = [

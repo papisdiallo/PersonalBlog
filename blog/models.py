@@ -9,9 +9,15 @@ User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    category_slug = models.SlugField(blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.name)
+            super(Post, self).save(*args, **kwargs)
 
 
 class Post(models.Model):
@@ -19,6 +25,7 @@ class Post(models.Model):
     title = models.CharField(max_length=150)
     thumbnail = models.ImageField(upload_to="media/thumbnail_pics")
     category = models.ManyToManyField(Category, related_name="categories")
+    post_slug = models.SlugField(blank=True, null=True)
     overview = models.TextField()
     content = HTMLField("content")
     date_posted = models.DateTimeField(default=timezone.now)

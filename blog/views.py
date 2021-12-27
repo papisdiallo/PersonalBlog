@@ -87,5 +87,5 @@ def contact(request):
 
 
 def about(request):
-    context = {}
+    context = get_context(request)
     return render(request, "blog/about.html", context)

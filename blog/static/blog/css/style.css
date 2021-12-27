@@ -167,11 +167,50 @@ figure {
 img {
   vertical-align: middle;
   border-style: none; }
-
+.active-user {
+  background: #a2b1b714;
+  padding: 7px 20px 7px 6px !important;
+  border-left: 3px solid #1eafed;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;}
 svg {
   overflow: hidden;
-  vertical-align: middle; }
+  vertical-align: middle;
+  overflow: hidden;
+  vertical-align: middle;
+  height: 41px;
+  width: 40px;
+  text-align: center;
+  opacity: .7;
+  cursor: pointer; 
+  transition: opacity .3s ease; }
 
+svg:hover {
+    opacity: 1; }
+
+#colorlib-aside #colorlib-main-menu ul li a.active-user:after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    background-color: #1eafed;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -moz-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -ms-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -o-transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-bottom-right-radius: 80px;
+    width: 85%;
+    border-left: unset;
+}
 table {
   border-collapse: collapse; }
 
@@ -8253,7 +8292,7 @@ h1, h2, h3, h4, h5,
       list-style: none;
       font-size: 16px;
       letter-spacing: 0.03rem;
-      font-weight: 500; }
+      font-weight: 400; }
       #colorlib-aside #colorlib-main-menu ul li a {
         color: rgba(0, 0, 0, 0.7);
         text-decoration: none;
