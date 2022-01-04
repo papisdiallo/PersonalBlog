@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from Users.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.sites.shortcuts import get_current_site
+
 
 # from django.views import generics
 from blog.models import Post, Category
