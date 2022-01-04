@@ -15,10 +15,10 @@
 			{% else %}
 			<span><a href="{% url 'login' %}" class="btn btn-info mb-2 mt-2">Login</a></span>
 			{% endif %}
-			<li class="colorlib-active"><a href="{% url 'home' %}">Home</a></li>
-			<li><a href="{% url 'about' %}">About</a></li>
-			<li><a href="{% url 'contact' %}">Portfolio</a></li>
-			<li><a href="{% url 'contact' %}">Contact</a></li>
+			<li class="{% if request.get_full_path == "/"  %}colorlib-active {% endif %}"><a href="{% url 'home' %}">Home</a></li>
+			<li class="{% if "about" in request.get_full_path  %}colorlib-active {% endif %}"><a href="{% url 'about' %}">About</a></li>
+			<li ><a href="{% url 'contact' %}">Portfolio</a></li>
+			<li class="{% if "contact" in request.get_full_path %}colorlib-active {% endif %}"><a href="{% url 'contact' %}">Contact</a></li>
 			{% if user.is_authenticated %}
 				<li class='dropdown' style="cursor: pointer;"><a href="{% url 'contact' %}">Logout</a></li>
 			{% endif %}
@@ -47,7 +47,8 @@
 		</div>
 		<p class="pfooter">
 		  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved<br>
-		  This website is made by</p>
+		  This website is made by
+		</p>
 	</div>
+	{% include "blog/svg.html" %}
 </aside>
-{% include "blog/svg.html" %}

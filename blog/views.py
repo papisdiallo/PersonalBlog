@@ -11,6 +11,7 @@ from django.contrib import messages
 
 def home(request):
     context = get_context(request)
+    print(request.get_full_path())
     form = context["form"]
     process_post_request(request, form)
     return render(request, "blog/index.html", context)

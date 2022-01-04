@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+{% load usernameFilter %}
+<html lang="en">
+	{% include "blog/head.html" %}
+  <body>
+	<div id="colorlib-page" >
+        <div class="myNav fixed">
+            <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle ">
+                <i></i>
+            </a>
+             
+            <span class="profile mt-2" id="myLogo">PSDiallo</span>
+        </div>
+        <aside id="colorlib-aside" role="complementary" class="js-fullheight api-aside-nav">
+            <nav id="colorlib-main-menu" role="navigation">
+                <ul>
+                    <li class="{% if request.get_full_path == "/"  %}colorlib-active {% endif %}"><a href="{% url 'home' %}">Get Started</a></li>
+                    <li class="{% if "about" in request.get_full_path  %}colorlib-active {% endif %}"><a href="{% url 'about' %}">Guides</a></li>
+                    <li ><a href="{% url 'contact' %}">Portfolio</a></li>
+                    <li class="{% if "contact" in request.get_full_path %}colorlib-active {% endif %}"><a href="{% url 'contact' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                        <li class='dropdown' style="cursor: pointer;"><a href="{% url 'contact' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        </aside>
+    
+        <div id="colorlib-main">
+            <section class="ftco-section ftco-no-pt ftco-no-pb">
+                <div class="row">
+                    <div class="col-xl-8 py-5 px-md-5 bg-light">
+                        <h1 class="get-started">Get started with PSDiallo Blog Api</h1>
+                        <p> the PSDiallo blog api is an public api where you can get informations about all the posts and comments of the PSDiallo blog and much more...</br>
+                        <hr></p>
+                        <section>
+                            <div class="prereqs mb-lg-5">
+                                <h2>Prerequisites</h2>
+                                <p>Before you start using the api, you need to do the following:</p>
+                                    <ul>
+                                        <li>Create a developer<a href="#"> account</a></li>
+                                        <li>Create an <a href="#">API Key</a></li>
+                                        <li><a href="#">Make sure you have cURL installed in your machine</a></li>
+                                    </ul>
+
+                                <div class="api-docs-info">
+                                    <span>cURL comes standard on Mac operating systems.</span>
+                                </div> 
+                            </div>
+
+                            <div class="get-posts my-lg-5">
+                                <h2>How to get all the posts of the blog</h2>
+                                <p>the following components must be present in the api call</p>
+
+                                <ul class="request-components">
+                                    <li><span>A host</span> The host for the web Api is always<br> <span class="web-host">localhost:8000</span></li>
+                                    <li><span>An Authorization header</span>  An Api Key must be included in the header for the requests to work</li>
+                                    <li><span>Request </span>The format of your payload must be in JSON format when submitting data to a resource via POST or PUT</li>
+                                </ul>
+
+                                <p class="mt-3" style="font-style:italic;">To get all posts using the PSDiallo API:</p>
+                            </div>
+                            <pre class="_5s-8 prettyprint lang-code prettyprinted" style=""> <span class="pln">curl </span><span class="pun">-</span><span class="pln">i </span><span class="pun">-</span><span class="pln">X GET </span> <span class="str">"https://graph.facebook.com/{user-id}/accounts
+                                ?access_token={user-access-token}"</span> </pre>
+                                <ol class="docs-article__list">
+                                    <li>Copy the curl example above.</li>
+                                    <li>Paste the curl call into your favorite text editor.</li>
+                                    <li>Copy your API key and paste it in the "Authorization" header.</li>
+                                    <li>In the data section, specify the "to", "from", and "reply to" names and email addresses and enter a subject.</li>
+                                    <li>Copy the code and paste it in your terminal.</li>
+                                    <li>Hit <strong>Enter</strong>.</li>
+                                    <li>Check the inbox of the address you specified as the "to" email and see your message!</li>
+                                </ol>
+                                <p>On success, you will get a response like the one below</p>
+                                <pre class="_5s-8 prettyprint lang-json prettyprinted" style=""><span class="pun">{</span><span class="pln"></span><span class="str">"data"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+                                  </span><span class="pun">{</span><span class="pln">
+                                    </span><span class="str">"access_token"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{page-access-token-for-this-page}"</span><span class="pun">,</span><span class="pln">
+                                    </span><span class="str">"category"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Internet Company"</span><span class="pun">,</span><span class="pln">
+                                    </span><span class="str">"category_list"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+                                      </span><span class="pun">{</span><span class="pln">
+                                        </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"2256"</span><span class="pun">,</span><span class="pln">
+                                        </span><span class="str">"name"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Internet Company"</span><span class="pln">
+                                      </span><span class="pun">}</span><span class="pln">
+                                    </span><span class="pun">],</span><span class="pln">
+                                    </span><span class="str">"name"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Name of this Page"</span><span class="pun">,</span><span class="pln">
+                                    </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"{page-id}"</span><span class="pun">,</span><span class="pln">
+                                    </span><span class="str">"tasks"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+                                      </span><span class="str">"ANALYZE"</span><span class="pun">,</span><span class="pln">
+                                      </span><span class="str">"ADVERTISE"</span><span class="pun">,</span><span class="pln">
+                                      </span><span class="str">"MODERATE"</span><span class="pun">,</span><span class="pln">
+                                      </span><span class="str">"CREATE_CONTENT"</span><span class="pln">
+                                    </span><span class="pun">]</span><span class="pln">
+                                  </span><span class="pun">},</span><span class="pln">
+                              </span><span class="pun">...</span></pre>
+                                <div class="markdown">
+                                    <h2 class="docs-article__section-title" id="api-response-messages"><a class="toclink" href="#api-response-messages">API response messages</a></h2>
+                                    <p>All responses are returned in JSON format. We specify this by sending the <code>Content-Type</code> header. The Web API v3 provides a selection of <a href="https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-responses#status-codes">response codes</a>, <a href="https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-responses#content-type-header">content-type headers</a>, and <a href="https://sendgrid.api-docs.io/v3.0/how-to-use-the-sendgrid-v3-api/api-responses#pagination">pagination</a> options to help you interpret the responses to your API requests.</p>
+                                </div>
+                        </section>
+                    </div>
+                    {% include "blog/aside.html" %}
+                </div>
+            </section>
+        </div>
+</body>
+</html>

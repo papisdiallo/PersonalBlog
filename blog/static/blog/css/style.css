@@ -8286,6 +8286,16 @@ h1, h2, h3, h4, h5,
   #colorlib-aside #colorlib-main-menu ul {
     margin: 0;
     padding: 0; }
+
+    #colorlib-aside #colorlib-main-menu ul li {
+      margin: 0 0 5px 0;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+      letter-spacing: 0.03rem;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
     #colorlib-aside #colorlib-main-menu ul li {
       margin: 0 0 10px 0;
       padding: 0;
@@ -9432,4 +9442,83 @@ textarea.form-control {
 .colorlib-footer .social-links span:hover {
   background: #1eafed;
 }
+h1.get-started {
+  font-size: 60px;
+  /* display: flex; */
+  /* justify-content: center; */
+  text-align: center;
+  font-weight: 500;
+  color: #007bff;
+}
 
+.get-posts ul li span {
+    font-weight: 600;
+    color: #03468f;
+    font-style: italic;
+}
+
+.web-host {
+  font-weight: normal !important;
+  color: #912121 !important;
+}
+.api-docs-info {
+  padding: 20px;
+    background: #d4d4d5;
+    color: #606493fa;
+    border-left: 5px solid #606493fa;
+}
+.highligth {
+  position: relative;
+}
+.btn-copy {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+}
+.code {
+  color: #66637A;
+  font-family: "webfont_input",Monaco,monospace;
+  font-size: 1rem;
+}
+
+.highlight .nt {
+  color: #330099;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #CC3300;
+  font-weight: bold;
+}
+._57mb._3fw6 pre.prettyprint {
+  background-color: #1c1e21;
+  border: 1px solid #8d949e;
+  color: #fff;
+}
+pre._5s-8.prettyprint{
+background-color: #f5f6f7;
+border: 1px solid #e9ebee;
+border-radius: 3px;
+color: #4b4f56;
+font-family:"JetBrains Mono", Consolas, Monaco, monospace;
+font-size: 14px;
+line-height: 20px;
+margin: 20px 0;
+overflow: auto;
+padding: 12px;
+word-wrap: normal;
+}
+pre.prettyprint {
+    background-color: #1c1e21 !important;
+    border: 1px solid #8d949e;
+    color: #fff;
+}
+pre.prettyprint .pln {
+    color: #fff;
+}
+pre.prettyprint .pun {
+  color: #fff;
+}
+pre.prettyprint .str {
+  color: #8fdc33;
+}

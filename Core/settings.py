@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-3tl55lpu@ohkm3a_q7_l2=6c3u(@4@d=*m@ii^fdkqitdl*95@"
+SECRET_KEY = str(os.environ.get("SECRET_KEY"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,8 +46,18 @@ INSTALLED_APPS = [
     "tinymce",
     "crispy_forms",
     "rest_framework",
+    "rest_framework_simplejwt",
     "Api",
+    "drf_yasg",
 ]
+SWAGGER_SETTINGS = {"USE_SESSION_AUTH": False}
+
+REST_FRAMEWORK = {
+    "NON_FIELD_ERRORS_KEY": "error",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -143,8 +154,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "psdiallo100@gmail.com"
-EMAIL_HOST_PASSWORD = "zquplrlhffkrjlxl"
+EMAIL_HOST_USER = str(os.environ.get("EMAIL_HOST_USER"))
+EMAIL_HOST_PASSWORD = str(os.environ.get("EMAIL_HOST_PASSWORD"))
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
