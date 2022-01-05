@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from django.urls import reverse_lazy
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,20 +44,33 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "Marketing.apps.MarketingConfig",
     "Users.apps.UsersConfig",
+    "Api.apps.ApiConfig",
     "tinymce",
     "crispy_forms",
     "rest_framework",
-    "rest_framework_simplejwt",
-    "Api",
     "drf_yasg",
 ]
-SWAGGER_SETTINGS = {"USE_SESSION_AUTH": False}
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False,
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+        }
+    },
+}
 
 REST_FRAMEWORK = {
     "NON_FIELD_ERRORS_KEY": "error",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=1),
 }
 
 MIDDLEWARE = [

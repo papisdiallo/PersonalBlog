@@ -10,5 +10,3 @@ User = get_user_model()
 def createNewProfile(sender, instance, created, **kwargs):
     if created and not instance.is_developer_account:
         Profile.objects.create(user=instance)
-    if created == False:
-        instance.profile.save()

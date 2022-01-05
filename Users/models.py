@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.signals import pre_save
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class UserManager(BaseUserManager):
@@ -77,6 +78,14 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+    @property
+    def tokens(self):
+        tokens = RefreshToken.for_user(self)
+        return {
+            "refresh": tokens,
+            "access_token": tokens.access_token,
+        }
 
     @property
     def active(self):
