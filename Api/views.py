@@ -169,9 +169,6 @@ class CommentRudAPIView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
     queryset = Comment.objects.all()
 
-    def get_queryset(self, *args, **kwargs):
-        return self.queryset.filter(id=self.kwargs.get("id"))
-
-    def perform_update(self, serializer):
-        post = get_object_or_404(Post, post_slug=self.kwargs.get("post_slug"))
-        instance = serializer.save(author=self.request.user, post=post)
+    # def perform_update(self, serializer):
+    #     post = get_object_or_404(Post, post_slug=self.kwargs.get("post_slug"))
+    #     instance = serializer.save(author=self.request.user, post=post)
