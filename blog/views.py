@@ -7,11 +7,15 @@ from Marketing.models import Subscriber
 from .forms import CommentForm, ContactForm
 from fonctions.funtions import counting_categories, get_context, process_post_request
 from django.contrib import messages
+from django.conf import settings
+from django.template.context_processors import csrf
+from crispy_forms.utils import render_crispy_form
+from django.core.mail import EmailMessage
+from Api.utils import Util
 
 
 def home(request):
     context = get_context(request)
-    print(request.get_full_path())
     form = context["form"]
     process_post_request(request, form)
     return render(request, "blog/index.html", context)
@@ -26,9 +30,9 @@ def category(request, cat):
     return render(request, "blog/category.html", context)
 
 
-def singlePost(request, pk):
+def singlePost(request, post_slug):
     form = CommentForm(request.POST or None)
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, post_slug=post_slug)
     comments = Comment.objects.all()
     if form.is_valid():
         form.instance.author = request.user
@@ -39,6 +43,9 @@ def singlePost(request, pk):
     context["post"] = post
     context["form"] = form
     context["comments"] = comments
+    context["comment_count"] = post.comments.filter(
+        author__is_developer_account=False
+    ).count()
     return render(request, "blog/single.html", context)
 
 
@@ -67,7 +74,7 @@ def search(request):
     q = request.GET.get("q")
     if q:
         queryset = Post.objects.filter(
-            Q(title__icontains=q) | Q(overview__icontains=q)
+            Q(title__icontains=q) | Q(overview__icontains=q) | Q(category__name=q)
         ).distinct()
     result_count = queryset.count()
 
@@ -79,8 +86,26 @@ def search(request):
 
 def contact(request):
     form = ContactForm(request.POST or None)
-    if form.is_valid():
-        print("the form is valid")
+    if request.is_ajax():
+        response = dict()
+        if form.is_valid():
+            email_data = dict()
+            email_data["subject"] = "Thanks For contacted me"
+            email_data["to_email"] = form.cleaned_data.get("email", "")
+            email_data[
+                "email_body"
+            ] = "Thank you for contacting me. We will be in touch as soon as possible!\n Please feel free to reply for any question or request.\n Best Regards!!\n Sahine"
+            email_data["from_email"] = settings.EMAIL_HOST_USER
+            Util.send_email(email_data)  # send the email to my self
+            response["success"] = True
+            return JsonResponse(response)
+        else:
+            response["success"] = False
+            csrf_context = {}
+            csrf_context.update(csrf(request))
+            formErrors = render_crispy_form(form, context=csrf_context)
+            response["formErrors"] = formErrors
+            return JsonResponse(response)
     context = {
         "form": form,
     }

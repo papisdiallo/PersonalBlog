@@ -53,14 +53,15 @@ class LoginSerializer(serializers.ModelSerializer):
         ]
 
     def get_tokens(self, obj):
-        user = User.objects.get(email=obj.email)
+        user = User.objects.get(email=obj["email"])
         tokens = RefreshToken.for_user(user)
         return {
-            "refresh": user.tokens,
-            "access_token": user.tokens.access_token,
+            "refresh": str(tokens),
+            "access_token": str(user.tokens["access_token"]),
         }
 
     def validate(self, args):
+
         email = args.get("email", "")
         password = args.get("password", "")
         user = authenticate(email=email, password=password)

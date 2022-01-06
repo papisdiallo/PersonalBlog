@@ -116,10 +116,11 @@
 
                 <div class="pt-5 mt-5">
               
-                  <h3 class="mb-5 font-weight-bold"><span id="count">{{post.comments.all.count}}</span> Comment(s)</h3>
+                  <h3 class="mb-5 font-weight-bold"><span id="count">{{comments_count}}</span> Comment(s)</h3>
                   <div id="commentUl">
                     <ul class="comment-list" id="comment-list"><ul class="comment-list">
                       {% for comment in post.comments.all %}
+                        {% if not comment.author.is_developer_account %}
                         <li class="comment">
                           <div class="vcard bio">
                               <img src="{{comment.author.profile.profile_picture.url}}" alt="Image placeholder">
@@ -130,7 +131,8 @@
                               <p>{{comment.content}}</p>
                               <p><a href="#" class="reply">Reply</a></p>
                           </div>
-                        </li>                
+                        </li>
+                        {% endif %}                
                       {% endfor %}
                     </ul>
                   </div>

@@ -273,3 +273,36 @@ $('#username').click(function (e) {
 	profiles.hasClass('non-profile') ? profiles.removeClass('non-profile').addClass('profile') :
 		profiles.removeClass('profile').addClass('non-profile')
 })
+
+// get the submit btn parent and add eventlistener to it
+console.log($("#contactForm").parent())
+$("#contactForm").parent().on('click', (e) => {
+	if (e.target.getAttribute("id") !== "submit-id-contact-me") return;
+	e.preventDefault();
+	e.target.setAttribute("disabled", true);
+	$.ajax({
+		url: "/contact/",
+		method: "POST",
+		data: $("#contactForm").serialize(),
+		success: (response) => {
+			$(e.target).prop("disabled", false)
+			if (response.success) {
+				$("#contactForm")[0].reset();
+				$("#contact-me-alert").show('slide', { direction: 'right' }, 300);
+				setTimeout(() => {
+					$("#contact-me-alert").hide('slide', { direction: 'left' }, 300);
+				}, 2000)
+			} else {
+				$("#contactForm").replaceWith(response.formErrors);
+			}
+
+		},
+		error: (error) => {
+			console.log(error);
+		}
+
+	})
+})
+// create a view to handle the form valid and return the form with errors if the form is not valid
+// if the for is valid send and email to psdiallo200 
+// on success jusst alert the user

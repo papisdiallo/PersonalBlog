@@ -1,19 +1,20 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
 from rest_framework import generics, status, views
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from Users.serializers import RegisterSerializer, LoginSerializer
-from Api.serializers import PostSerializer
+from Api.serializers import PostSerializer, CommentSerializer
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.sites.shortcuts import get_current_site
 from .utils import Util
 import jwt
 from drf_yasg import openapi
-from blog.models import Post, Category
+from blog.models import Post, Category, Comment
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
+from .permissions import IsAuthor
 
 # from django.views import generics
 from blog.models import Post, Category
@@ -39,6 +40,20 @@ class PostListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class PostDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = "post_slug"
+
+    def get(self, request, *args, **kwargs):
+        # replace with get_object_or_404
+        post = get_object_or_404(Post, post_slug=self.kwargs.get("post_slug"))
+        serializer = self.serializer_class(post)
+        comments = CommentSerializer(post.comments.all(), many=True)
+        return Response({"data": serializer.data, "post_comments": comments.data})
 
 
 def apiDocsView(request):
@@ -97,7 +112,7 @@ class EmailVerificationView(views.APIView):
     @swagger_auto_schema(manual_parameters=[token_config])
     def get(self, request, *args, **kwargs):
         # get the acess token
-        access_token = self.request.get("token")
+        access_token = self.request.GET.get("token")
         try:
             payload = jwt.decode(
                 access_token, settings.SECRET_KEY, algorithms="HS256"
@@ -132,3 +147,31 @@ class LoginApiView(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data)
+
+
+class PostCommentsListAPIView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        post = get_object_or_404(Post, post_slug=self.kwargs.get("post_slug"))
+        return self.queryset.filter(post=post)
+
+    def perform_create(self, serializer):
+        post = get_object_or_404(Post, post_slug=self.kwargs.get("post_slug"))
+        instance = serializer.save(author=self.request.user, post=post)
+
+
+class CommentRudAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, IsAuthor)
+    serializer_class = CommentSerializer
+    lookup_field = "id"
+    queryset = Comment.objects.all()
+
+    def get_queryset(self, *args, **kwargs):
+        return self.queryset.filter(id=self.kwargs.get("id"))
+
+    def perform_update(self, serializer):
+        post = get_object_or_404(Post, post_slug=self.kwargs.get("post_slug"))
+        instance = serializer.save(author=self.request.user, post=post)

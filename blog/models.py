@@ -36,7 +36,7 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)
-            super(Post, self).save(*args, **kwargs)
+        return super(Post, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):

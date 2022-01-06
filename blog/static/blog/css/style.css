@@ -8294,7 +8294,6 @@ h1, h2, h3, h4, h5,
       font-size: 14px;
       letter-spacing: 0.03rem;
       font-weight: 400;
-      text-transform: uppercase;
     }
     #colorlib-aside #colorlib-main-menu ul li {
       margin: 0 0 10px 0;
@@ -9521,4 +9520,11 @@ pre.prettyprint .pun {
 }
 pre.prettyprint .str {
   color: #8fdc33;
+}
+#contact-me-alert {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 60%;
+  display: none;
 }
